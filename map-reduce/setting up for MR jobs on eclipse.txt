@@ -1,8 +1,0 @@
-D:\MyDocs\Dropbox\programs-26\bdp\map-reduce\input\amazon-sales.csv  D:\MyDocs\Dropbox\programs-26\bdp\map-reduce\output\catcount
-
-https://github.com/cdarlint/winutils/tree/master/hadoop-3.3.6
-
-
-set 
-	HADOOP_HOME = C:\hadoop
-	Add "C:\hadoop\bin" to path
