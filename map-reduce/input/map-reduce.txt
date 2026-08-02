@@ -1,0 +1,5 @@
+MapReduce is A programming model for processing and generating large data sets. Users specify a map function that processes a key/value pair to generate a set of intermediate key/value pairs and a reduce function that merges all intermediate 
+values associated with the same intermediate key.
+ 
+We built a system around this programming model in 2003 to simplify construction of the inverted index for handling searches at Google.com. Since then, more than 10,000 distinct programs have been implemented  using MapReduce at Google, including algorithms for large-scale graph processing, text processing, machine learning, and statistical machine 
+translation. The Hadoop open source implementation of MapReduce has been used extensively outside of Google by a number of organizations.
