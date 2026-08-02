@@ -1,5 +1,19 @@
-MapReduce is A programming model for processing and generating large data sets. Users specify a map function that processes a key/value pair to generate a set of intermediate key/value pairs and a reduce function that merges all intermediate 
-values associated with the same intermediate key.
- 
-We built a system around this programming model in 2003 to simplify construction of the inverted index for handling searches at Google.com. Since then, more than 10,000 distinct programs have been implemented  using MapReduce at Google, including algorithms for large-scale graph processing, text processing, machine learning, and statistical machine 
-translation. The Hadoop open source implementation of MapReduce has been used extensively outside of Google by a number of organizations.
+Hadoop is a framework for distributed processing of large data sets.
+Hadoop uses the MapReduce programming model.
+MapReduce divides a job into map tasks and reduce tasks.
+
+Big data requires distributed storage and distributed computation.
+Hadoop provides HDFS for distributed storage.
+HDFS stores data in blocks across many machines.
+
+Spark is another big data processing framework.
+Spark can run independently or on Hadoop.
+Spark supports SQL, streaming, machine learning, and graph processing.
+
+Data is valuable.
+Data drives decisions.
+Data science uses data to discover patterns.
+Big data needs big computing resources.
+
+MapReduce MapReduce Hadoop Hadoop Hadoop
+Spark Spark Data Data Data Data
