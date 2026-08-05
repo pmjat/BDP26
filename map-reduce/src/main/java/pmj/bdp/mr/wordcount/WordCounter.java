@@ -30,6 +30,7 @@ public class WordCounter {
 		outputPath.getFileSystem(conf).delete(outputPath, true);
 		FileOutputFormat.setOutputPath(job, outputPath);
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
+
 	}
 
 }
