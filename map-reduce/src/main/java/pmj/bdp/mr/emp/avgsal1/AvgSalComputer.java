@@ -24,7 +24,11 @@ public class AvgSalComputer {
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 	 
 		job.setMapperClass(AvgSalMapper.class);
-		job.setCombinerClass(AvgSalCombiner.class);
+		// Note in this case you do not need to define separate Combiner
+		// standard reducer would work
+		job.setCombinerClass(AvgSalReducer.class);	
+		// Otherwise, if you need, you can define and specify it as following
+		//job.setCombinerClass(AvgSalCombiner.class);
 		job.setReducerClass(AvgSalReducer.class);
 
 		// Mapper output
