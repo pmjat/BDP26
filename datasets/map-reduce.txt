@@ -1,0 +1,19 @@
+Hadoop is a framework for distributed processing of large data sets.
+Hadoop uses the MapReduce programming model.
+MapReduce divides a job into map tasks and reduce tasks.
+
+Big data requires distributed storage and distributed computation.
+Hadoop provides HDFS for distributed storage.
+HDFS stores data in blocks across many machines.
+
+Spark is another big data processing framework.
+Spark can run independently or on Hadoop.
+Spark supports SQL, streaming, machine learning, and graph processing.
+
+Data is valuable.
+Data drives decisions.
+Data science uses data to discover patterns.
+Big data needs big computing resources.
+
+MapReduce MapReduce Hadoop Hadoop Hadoop
+Spark Spark Data Data Data Data
