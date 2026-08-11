@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class TopKReducer
+class TopKReducer
         extends Reducer<Text, Text, Text, Text> {
 
     private PriorityQueue<String> heap;

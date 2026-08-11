@@ -6,7 +6,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class TopKMapper
+class TopKMapper
         extends Mapper<LongWritable, Text, Text, Text> {
 
     private PriorityQueue<String> min_heap;

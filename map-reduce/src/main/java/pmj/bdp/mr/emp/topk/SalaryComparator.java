@@ -2,7 +2,7 @@ package pmj.bdp.mr.emp.topk;
 
 import java.util.Comparator;
 
-public class SalaryComparator implements Comparator<String> {
+class SalaryComparator implements Comparator<String> {
 
     @Override
     public int compare(String e1, String e2) {
