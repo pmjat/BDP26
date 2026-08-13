@@ -1,1 +1,0 @@
-CustomerID,Country,State

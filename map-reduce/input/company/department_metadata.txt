@@ -1,1 +1,0 @@
-dno,name,mgr_eno,join_date

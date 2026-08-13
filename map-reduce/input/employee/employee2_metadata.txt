@@ -1,2 +1,0 @@
-Columns:
-ENO,Age, Department, Education, EducationField, Gender, HourlyRate, Salary
