@@ -1,24 +1,27 @@
 package pmj.bdp.spark.emp;
 
+import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.SparkSession;
 
 import scala.Tuple2;
 
 public class SalaryAvgByDepartment {
-
+	
+	private static JavaSparkContext sc;
+	
+    private static void setup() {
+		//Setup Spark Context
+		SparkConf sparkConf = new SparkConf()
+				.setAppName("SparkWordCount")
+				.setMaster("local"); //Local mode, alternatively CLuster mode
+	    sc = new JavaSparkContext(sparkConf);
+    }
+    
     public static void main(String[] args) {
 
-    		//SETUP
-        // Create SparkSession
-        SparkSession spark = SparkSession.builder()
-                .appName("Salary SUM By Department")
-                .master("local[*]")
-                .getOrCreate();
-        // Create JavaSparkContext
-        JavaSparkContext sc = new JavaSparkContext(spark.sparkContext());
+    	setup();
 
         // Read input file
         String csv_file = "..\\datasets\\employee1\\employee.csv";
@@ -58,6 +61,5 @@ public class SalaryAvgByDepartment {
         
         // Stop Spark
         sc.close();
-        spark.stop();
     }
 }

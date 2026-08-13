@@ -1,9 +1,9 @@
 package pmj.bdp.spark.wordcount;
 
+import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.SparkSession;
 import scala.Tuple2;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +11,13 @@ import java.util.List;
 public class LineCounter {
 
 	private static JavaSparkContext sc;
-	private static SparkSession spark;
 	
-    static void setup() {
-		//SETUP: Create SparkSession and JavaSparkContext
-        spark = SparkSession.builder()
-                .appName("Salary SUM By Department")
-                .master("local[*]")
-                .getOrCreate();
-        sc = new JavaSparkContext(spark.sparkContext());    	
+    private static void setup() {
+		//Setup Spark Context
+		SparkConf sparkConf = new SparkConf()
+				.setAppName("SparkWordCount")
+				.setMaster("local"); //Local mode, alternatively CLuster mode
+	    sc = new JavaSparkContext(sparkConf);
     }
 
     static List<Tuple2<String, Integer>> getLineStats(String line) {
@@ -54,6 +52,5 @@ public class LineCounter {
         );
 
         sc.close();
-        spark.stop();
     }
 }

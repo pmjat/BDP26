@@ -1,22 +1,21 @@
 package pmj.bdp.spark.demo;
 
 import java.util.Arrays;
+
+import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.SparkSession;
 
 public class Tester1 {
 	
 	private static JavaSparkContext sc;
-	private static SparkSession spark;
 	
     private static void setup() {
-		//SETUP: Create SparkSession and JavaSparkContext
-        spark = SparkSession.builder()
-                .appName("Salary SUM By Department")
-                .master("local[*]")
-                .getOrCreate();
-        sc = new JavaSparkContext(spark.sparkContext());    	
+		//Setup Spark Context
+		SparkConf sparkConf = new SparkConf()
+				.setAppName("SparkWordCount")
+				.setMaster("local"); //Local mode, alternatively CLuster mode
+	    sc = new JavaSparkContext(sparkConf);
     }
 
 	
@@ -30,7 +29,6 @@ public class Tester1 {
 
         // Stop Spark
         sc.close();
-        spark.stop();
     }
     
     //private static void printList(List<String> list) {
