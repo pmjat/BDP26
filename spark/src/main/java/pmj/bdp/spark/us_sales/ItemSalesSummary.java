@@ -1,29 +1,27 @@
 package pmj.bdp.spark.us_sales;
 
-import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import pmj.bdp.spark.setup.SparkContextSetup;
 import scala.Tuple2;
 
 public class ItemSalesSummary {
 
-	private static JavaSparkContext sc;
-	
-    private static void setup() {
-		//Setup Spark Context
-		SparkConf sparkConf = new SparkConf()
-				.setAppName("SparkWordCount")
-				.setMaster("local"); //Local mode, alternatively CLuster mode
-	    sc = new JavaSparkContext(sparkConf);
-    }
-
     public static void main(String[] args) {
 
-    	setup();	
+    	JavaSparkContext sc = SparkContextSetup.setup( "Item Sales Summary" );
     	
         // Read data file
         String data_file = "..\\datasets\\us-sales\\orders_0.csv";
+
+        getFrequentSoldItems( sc, data_file );
+
+        sc.close();
+    }
+    
+    public static void getFrequentSoldItems(JavaSparkContext sc, String data_file) {
+    	
         JavaRDD<String> dataLines = sc.textFile(data_file);
 
         // Split each line into fields
@@ -50,7 +48,6 @@ public class ItemSalesSummary {
         // Print frequent items
         freqItems.collect().forEach(
                 r -> System.out.println(r._1() + "\t" + r._2()));
-
-        sc.close();
+    	
     }
 }
