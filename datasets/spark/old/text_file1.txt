@@ -1,0 +1,70 @@
+A simple word count application
+
+The volume of unstructured text in existence is growing dramatically, and Spark is an excellent tool for analyzing this type of data.
+We continue from the word counting example and in this notebook, we will write code that calculates the most common words in the Complete Works of William Shakespeare retrieved from Project Gutenberg. This could also be scaled to larger applications, such as finding the most common words in Wikipedia.
+
+During this example we will cover:
+
+    Part 0: What is Apache Spark
+    Part 1: Creating a base DataFrame and performing operations
+    Part 2: Counting with Spark SQL and DataFrames
+    Part 3: Finding unique words and a mean value
+    Part 4: Apply word count to a file
+
+Note that for reference, you can look up the details of the relevant methods in Spark's Python API.
+Part 0: Spark
+
+An introduction to using Apache Spark with the PySpark SQL API running in a notebook
+What is Spark
+
+Apache Spark is an open-source cluster-computing framework. Originally developed at the University of California, Berkeley's AMPLab, the Spark codebase was later donated to the Apache Software Foundation, which has maintained it since. Spark it is a fast and general engine for large-scale data processing.
+Databricks is a company founded by the creators of Apache Spark, that aims to help clients with cloud-based big data processing using Spark.
+
+Traditional analysis tools like R and Python Pandas run on a single machine but data are growing faster than computation speed.
+The Opportunity: Cloud computing is a game-changer.
+It provides access to low-cost computing and storage.
+Distributing data over cluster of machines means lots of hard drives, lots of CPUs but also lots of memory !
+Storage is getting cheaper but stalling CPU speeds are the bottlenecks.
+A new Opportunity: Keep more data in-memory! In-memory can make a big difference, up to 100x faster. Spark is a new distributed execution engine that leverages the in-memory paradigm.
+
+The challenge with cloud computing has always been programming the resources.
+Spark is developed in Scala and - besides Scala itself - supports other languages such as Java and Python. We are using for this example the Python programming interface to Spark (pySpark). pySpark provides an easy-to-use programming abstraction and parallel runtime: “Here’s an operation, run it on all of the data”.
+Spark Context
+
+In Spark, communication occurs between a driver and executors. The driver has Spark jobs that it needs to run and these jobs are split into tasks that are submitted to the executors for completion. Executor programs run on cluster nodes or in local threads. The results from these tasks are delivered back to the driver. Where does code run?
+
+    Locally, in the driver
+    Distributed at the executors (Executors run in parallel and have much more memory)
+    Both at the driver and the executors
+
+Problems with cheap hardware are: failures, network speeds versus shared memory, much more latency, network slower than storage, uneven performance.
+How do we deal with machine failures? We launch another task.
+How do we deal with slow tasks? We launch another task.
+
+When running Spark, you start a new Spark application by creating a SparkContext.
+SparkContext tells Spark how and where to access a cluster.
+The program next creates a SQLContext object which is used to create and manage the DataFrames.
+When the SparkContext is created, it asks the master for some cores to use to do work. The master sets these cores aside just for you; they won't be used for other applications.
+When using Databricks, both a SparkContext and a SQLContext are created for you automatically. sc is your SparkContext, and sqlContext is your SQLContext.
+
+# Display the type of the Spark sqlContext
+type(sqlContext)
+
+Out[35]: pyspark.sql.context.HiveContext
+
+Note that the type is HiveContext. This means we're working with a version of Spark that has Hive support. Compiling Spark with Hive support is a good idea, even if you don't have a Hive metastore. As the Spark Programming Guide states, a HiveContext "provides a superset of the functionality provided by the basic SQLContext. Additional features include the ability to write queries using the more complete HiveQL parser, access to Hive UDFs [user-defined functions], and the ability to read data from Hive tables."
+Part 1: Creating a base DataFrame and performing operations
+
+DataFrames (DF) are the key concept, the primary abstraction in Spark. Similar to Python Pandas dataframe, they are immutable once constructed and enable operations on collection of elements in parallel.
+You construct DataFrames by parallelizing existing Python collections (lists), by transforming an existing Spark or pandas DFs or from files in HDFS or any other storage system.
+DataFrames support two types of operations: transformations and actions.
+Transformations are lazy (not computed immediately). A transformed DF is executed when action runs on it.
+A transformation to a DataFrame is for example select. Actions to a DataFrame are for example show and count.
+Spark Program Lifecycle
+
+    Create DataFrames from external data or create DataFrame from a collection in driver program
+    Lazily transform them into new DataFrames
+    cache() some DataFrames for reuse (optional)
+    Perform actions to execute parallel computation and produce results
+
+Most of Python code runs in driver, except for code passed to transformations. Transformations run at executors. Actions can run both at executors and driver

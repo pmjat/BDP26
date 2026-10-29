@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>pmj-bdp</groupId>
+	<artifactId>dynamodb</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+<!-- following is for SDK 1	
+	<dependencyManagement>
+	    <dependencies>
+	        <dependency>
+	            <groupId>com.amazonaws</groupId>
+	            <artifactId>aws-java-sdk-bom</artifactId>
+	            <version>1.12.797</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+	    </dependencies>
+	</dependencyManagement>	
+	
+	<dependencies>
+	    <dependency>
+	        <groupId>com.amazonaws</groupId>
+	        <artifactId>aws-java-sdk-dynamodb</artifactId>
+	    </dependency>
+	  	-->
+<!-- following is for SDK 2 -->
+	<dependencyManagement>
+	    <dependencies>
+	        <dependency>
+	            <groupId>software.amazon.awssdk</groupId>
+	            <artifactId>bom</artifactId>
+	            <version>2.31.0</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+	    </dependencies>
+	</dependencyManagement>  
+	<dependencies>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>dynamodb</artifactId>
+		</dependency> <!-- -->
+		<dependency>
+		    <groupId>software.amazon.awssdk</groupId>
+		    <artifactId>dynamodb-enhanced</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.18.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-simple</artifactId>
+		    <version>1.7.36</version>
+		</dependency>		
+		
+		
+	</dependencies>
+</project>
